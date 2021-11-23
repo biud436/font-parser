@@ -1,4 +1,6 @@
-
+"""
+# Author: biud436
+"""
 class Font:
     def __init__(self, name, size=12):
         self.name = name
