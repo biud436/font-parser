@@ -1,6 +1,6 @@
 # Introduction
 
-This project allows you to read a real font family from the TrueType font file in the Python.
+This project allows you to read a real font family from the TrueType font file.
 
 # Usage
 
