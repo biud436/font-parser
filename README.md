@@ -14,9 +14,10 @@ pipenv run start --font="res/NanumGothicCoding.ttf"
 
 the result of parsing the font is shown below.
 
-```txt
+```sh
 pipenv run start --font="res/NanumGothicCoding.ttf"
 
+# --------------- Output --------------------- #
 major_version : 1
 minor_version : 0
 num_of_tables : 14
