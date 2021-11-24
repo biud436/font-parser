@@ -1,39 +1,108 @@
-"""
-# Author: biud436
-"""
+import struct
+
+class NameRecord:
+    def __init__(self):
+        self.platform_id = 0
+        self.encoding_id = 0
+        self.language_id = 0
+        self.name_id = 0
+        self.string_length = 0
+        self.string_offset = 0
+        self.name = ""
+        self.hex_offset = ""
+
+
 class Font:
-    def __init__(self, name, size=12):
+    def __init__(self, name):
         self.name = name
-        self.size = size
-        self.color = (0, 0, 0)
-        self.bold = False
-        self.italic = False
-        self.underline = False
-        self.strikethrough = False
+        self.fonts = []
 
-    def set_color(self, color):
-        self.color = color
-    
-    def set_bold(self, bold):
-        self.bold = bold
+    def parse(self):
+        font_name = self.name.strip()
+        with open(font_name, 'rb') as f:
+            # 빅엔디언 방식으로 12바이트를 읽는다.
+            font_offset_table_buffer = f.read(12)
+            major_version, minor_version, num_of_tables, padding = struct.unpack_from('>HHHH', font_offset_table_buffer)
+            
+            # 결과 값 출력
+            print("major_version : {major_version}" .format(major_version=major_version))
+            print("minor_version : {minor_version}" .format(minor_version=minor_version))
+            print("num_of_tables : {num_of_tables}" .format(num_of_tables=num_of_tables))
+            print("padding : {padding}" .format(padding=padding))
 
-    def set_italic(self, italic):
-        self.italic = italic
+            is_found_name_table = False
+            check_sum, offset, length = 0, 0, 0
 
-    def set_underline(self, underline):
-        self.underline = underline
+            for i in range(num_of_tables):
+                tag_name = f.read(4).decode('ascii')
+                data = f.read(12)
 
-    def set_strikethrough(self, strikethrough):
-        self.strikethrough = strikethrough
+                if tag_name == 'name':
+                    is_found_name_table = True
+                    # 32바이트 unsigned int 형식으로 읽는다.
+                    check_sum, offset, length = struct.unpack_from('>III', data)
+                    break
 
-    def set_size(self, size):
-        self.size = size
+            if not is_found_name_table:
+                raise Exception('이름 테이블을 찾지 못했습니다.')
 
-    def set_name(self, name):
-        self.name = name
+            print("check_sum : {check_sum}" .format(check_sum=check_sum))
+            print("offset : {offset}" .format(offset=offset))
+            print("length : {length}" .format(length=length))
 
-    def parse(self, file_name):
-        f = open(file_name, 'r')
-        for line in f:
-            puts(line)
-        f.close()
+            f.seek(offset)
+            
+            format_selector, name_record_count, storage_offset = struct.unpack_from('>HHH', f.read(6))
+
+            print("format_selector : {format_selector}" .format(format_selector=format_selector))
+            print("name_record_count : {name_record_count}" .format(name_record_count=name_record_count))
+            print("storage_offset : {storage_offset}" .format(storage_offset=storage_offset))
+
+            if format_selector != 0:
+                print("langTagCount detect")
+                print("langTagRecord[langTagCount] detect")                
+            
+            name_record_table = []
+            for i in range(name_record_count):
+                name_record = NameRecord()
+                name_record.platform_id = struct.unpack_from('>H', f.read(2))[0]
+                name_record.encoding_id = struct.unpack_from('>H', f.read(2))[0]
+                name_record.language_id = struct.unpack_from('>H', f.read(2))[0]
+                name_record.name_id = struct.unpack_from('>H', f.read(2))[0]
+                name_record.string_length = struct.unpack_from('>H', f.read(2))[0]
+                name_record.string_offset = struct.unpack_from('>H', f.read(2))[0]
+                name_record.name = ""
+
+                if name_record.name_id == 4:
+                    temp_file_pos = f.tell()
+
+                    f.seek(offset + name_record.string_offset + storage_offset)
+
+                    # name_record.hex_offset = hex(f.tell())
+
+                    len_ = name_record.string_length
+
+                    name_record.name = f.read(len_).decode('utf-16-be').rstrip('\0')
+                    name_record_table.append(name_record)
+                    f.seek(temp_file_pos)
+
+                
+                for i in name_record_table:
+                    print("name : {name}" .format(name=i.name))
+
+            self.fonts = name_record_table
+
+        return self
+
+            
+
+                
+
+
+
+
+
+
+
+
+

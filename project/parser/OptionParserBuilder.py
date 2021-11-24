@@ -4,7 +4,6 @@ class OptionParserBuilder:
     @staticmethod
     def build():
         parser = argparse.ArgumentParser(description='폰트를 분석하는 프로그램입니다.')
-        parser.add_argument("-f", "--font", help="사용할 폰트를 입력하세요", required=True)
-        parser.add_argument("-s", "--font-size", help="사용할 폰트 사이즈를 입력하세요", required=True)
+        parser.add_argument("-f", "--font", help="type the name of TTF file", required=True)
         args = parser.parse_args()
         return args
