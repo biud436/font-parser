@@ -17,7 +17,8 @@ pipenv run start --debug --font="res/NanumGothicCoding.ttf"
 the result of parsing the font is shown below.
 
 ```sh
-pipenv run start --font="res/NanumGothicCoding.ttf"
+# The parameter named '-d' is used to show the debug information.
+pipenv run start -d -f="res/NanumGothicCoding.ttf"
 
 # --------------- Debug Output --------------------- #
 major_version : 1
