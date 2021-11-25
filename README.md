@@ -4,10 +4,16 @@ This project allows you to read a real font family from the TrueType font file.
 
 # Usage
 
-To use this tools, you need to start with the following command:
+To use this tool, you need to install dependencies using pipenv.
 
 ```sh
 pipenv install
+```
+
+and next, you pass the path of the font file to the tool.
+
+```sh
+To use this tools, you need to start with the following command:
 pipenv run start -h
 pipenv run start --font="res/NanumGothicCoding.ttf"
 pipenv run start -d --font="res/NanumGothicCoding.ttf"
