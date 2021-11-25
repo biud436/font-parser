@@ -10,17 +10,19 @@ class Logger:
 
     def print_log(self, **kwargs):
         color = "\x1b[31m"
-        if kwargs["color"] == "green":
+        c = kwargs["color"]
+
+        if c == "green":
             color = "\x1b[32m"
-        elif kwargs["color"] == "yellow":
+        elif c == "yellow":
             color = "\x1b[33m"
-        elif kwargs["color"] == "blue":
+        elif c == "blue":
             color = "\x1b[34m"
-        elif kwargs["color"] == "magenta":
+        elif c == "magenta":
             color = "\x1b[35m"
-        elif kwargs["color"] == "cyan":
+        elif c == "cyan":
             color = "\x1b[36m"
-        elif kwargs["color"] == "white":
+        elif c == "white":
             color = "\x1b[37m"
 
         print(color + kwargs['message'] + "\x1b[0m")
