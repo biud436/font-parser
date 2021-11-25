@@ -68,6 +68,7 @@ class Font:
                 logger.debug("langTagCount detect")
                 logger.debug("langTagRecord[langTagCount] detect")                
             
+            # 이름 테이블을 파싱합니다.
             name_record_table = []
             for i in range(name_record_count):
                 name_record = NameRecord()
@@ -86,10 +87,10 @@ class Font:
 
                     len_ = name_record.string_length
 
+                    # 문자열 인코딩을 변경합니다.
                     name_record.name = f.read(len_).decode('utf-16-be').rstrip('\0')
                     name_record_table.append(name_record)
                     f.seek(temp_file_pos)
-
                 
                 for i in name_record_table:
                     logger.debug("name : {name}" .format(name=i.name))
