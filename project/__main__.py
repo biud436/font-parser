@@ -7,6 +7,7 @@ from logger.Logger import Logger
 logger = Logger()
 
 class EntryPoint:
+    
     @staticmethod
     def main():
         # 옵션 파서 생성
