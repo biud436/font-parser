@@ -1,4 +1,5 @@
 import struct
+from logger.Logger import Logger
 
 class NameRecord:
     def __init__(self):
@@ -11,29 +12,34 @@ class NameRecord:
         self.name = ""
         self.hex_offset = ""
 
+logger = Logger()
 
 class Font:
     def __init__(self, name):
         self.name = name
         self.fonts = []
 
+        # 폰트 인스턴스 생성
+        logger.print_log(message="폰트 객체가 생성되었습니다.", color="green")
+
     def parse(self):
         font_name = self.name.strip()
         with open(font_name, 'rb') as f:
-            # 빅엔디언 방식으로 12바이트를 읽는다.
+            logger.print_log(message="빅엔디언 방식으로 12바이트를 읽었습니다.", color="green")
             font_offset_table_buffer = f.read(12)
             major_version, minor_version, num_of_tables, padding = struct.unpack_from('>HHHH', font_offset_table_buffer)
             
             # 결과 값 출력
-            print("major_version : {major_version}" .format(major_version=major_version))
-            print("minor_version : {minor_version}" .format(minor_version=minor_version))
-            print("num_of_tables : {num_of_tables}" .format(num_of_tables=num_of_tables))
-            print("padding : {padding}" .format(padding=padding))
+            logger.debug("major_version : {major_version}" .format(major_version=major_version))
+            logger.debug("minor_version : {minor_version}" .format(minor_version=minor_version))
+            logger.debug("num_of_tables : {num_of_tables}" .format(num_of_tables=num_of_tables))
+            logger.debug("padding : {padding}" .format(padding=padding))
 
             is_found_name_table = False
             check_sum, offset, length = 0, 0, 0
 
             for i in range(num_of_tables):
+                logger.print_log(message="태그명 4바이트를 읽었습니다.", color="magenta")
                 tag_name = f.read(4).decode('ascii')
                 data = f.read(12)
 
@@ -46,21 +52,21 @@ class Font:
             if not is_found_name_table:
                 raise Exception('이름 테이블을 찾지 못했습니다.')
 
-            print("check_sum : {check_sum}" .format(check_sum=check_sum))
-            print("offset : {offset}" .format(offset=offset))
-            print("length : {length}" .format(length=length))
+            logger.debug("check_sum : {check_sum}" .format(check_sum=check_sum))
+            logger.debug("offset : {offset}" .format(offset=offset))
+            logger.debug("length : {length}" .format(length=length))
 
             f.seek(offset)
             
             format_selector, name_record_count, storage_offset = struct.unpack_from('>HHH', f.read(6))
 
-            print("format_selector : {format_selector}" .format(format_selector=format_selector))
-            print("name_record_count : {name_record_count}" .format(name_record_count=name_record_count))
-            print("storage_offset : {storage_offset}" .format(storage_offset=storage_offset))
+            logger.debug("format_selector : {format_selector}" .format(format_selector=format_selector))
+            logger.debug("name_record_count : {name_record_count}" .format(name_record_count=name_record_count))
+            logger.debug("storage_offset : {storage_offset}" .format(storage_offset=storage_offset))
 
             if format_selector != 0:
-                print("langTagCount detect")
-                print("langTagRecord[langTagCount] detect")                
+                logger.debug("langTagCount detect")
+                logger.debug("langTagRecord[langTagCount] detect")                
             
             name_record_table = []
             for i in range(name_record_count):
@@ -78,8 +84,6 @@ class Font:
 
                     f.seek(offset + name_record.string_offset + storage_offset)
 
-                    # name_record.hex_offset = hex(f.tell())
-
                     len_ = name_record.string_length
 
                     name_record.name = f.read(len_).decode('utf-16-be').rstrip('\0')
@@ -88,7 +92,7 @@ class Font:
 
                 
                 for i in name_record_table:
-                    print("name : {name}" .format(name=i.name))
+                    logger.debug("name : {name}" .format(name=i.name))
 
             self.fonts = name_record_table
 
