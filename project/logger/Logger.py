@@ -1,12 +1,11 @@
 from pyee import EventEmitter
 
 class Logger:
-
+    DEBUG_FLAG = False
     emitter = EventEmitter()
 
     def __init__(self, debug_flag=True):
         self.log = []
-        self.DEBUG_FLAG = debug_flag
 
     def print_log(self, **kwargs):
         color = "\x1b[31m"
@@ -46,5 +45,5 @@ class Logger:
         Logger.emitter.removeAllListeners(event)
     
     def debug(self, msg):
-        if self.DEBUG_FLAG:
+        if Logger.DEBUG_FLAG:
             print("\x1b[33m" + msg + "\x1b[0m") 

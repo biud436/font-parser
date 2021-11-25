@@ -10,6 +10,8 @@ To use this tools, you need to start with the following command:
 pipenv install
 pipenv run start -h
 pipenv run start --font="res/NanumGothicCoding.ttf"
+pipenv run start -d --font="res/NanumGothicCoding.ttf"
+pipenv run start --debug --font="res/NanumGothicCoding.ttf"
 ```
 
 the result of parsing the font is shown below.

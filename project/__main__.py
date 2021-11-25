@@ -12,6 +12,9 @@ class EntryPoint:
         # 옵션 파서 생성
         args = OptionParserBuilder.build()
         font_name = args.font.strip()
+        is_debug =args.debug
+
+        Logger.DEBUG_FLAG = is_debug == True
 
         # 폰트 파싱 객체 생성
         font = Font(font_name or "나눔고딕")
