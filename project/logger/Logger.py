@@ -1,8 +1,13 @@
 from pyee import EventEmitter
 
-class Logger:
+class Logger(object):
     DEBUG_FLAG = False
     emitter = EventEmitter()
+
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Logger, cls).__new__(cls)
+        return cls.instance
 
     def __init__(self, debug_flag=True):
         self.log = []

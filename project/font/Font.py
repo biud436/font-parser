@@ -29,7 +29,7 @@ class Font:
             check_sum, offset, length = 0, 0, 0
 
             for i in range(num_of_tables):
-                logger.print_log(message="태그명 4바이트를 읽었습니다.", color="magenta")
+                logger.print_log(message="태그명 4바이트를 읽었습니다[{pos}]".format(pos = f.tell()), color="magenta")
                 tag_name = f.read(4).decode('ascii')
                 data = f.read(12)
 
