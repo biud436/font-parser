@@ -1,6 +1,7 @@
 import argparse
 
 class OptionParserBuilder:
+    
     @staticmethod
     def build():
         parser = argparse.ArgumentParser(description='폰트를 분석하는 프로그램입니다.')
