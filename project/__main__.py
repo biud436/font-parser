@@ -2,6 +2,10 @@ from font.Font import Font
 from parser.OptionParserBuilder import OptionParserBuilder
 import platform
 
+from logger.Logger import Logger
+
+logger = Logger()
+
 class EntryPoint:
     @staticmethod
     def main():
@@ -17,11 +21,10 @@ class EntryPoint:
         results = filter(lambda x: x.language_id == 1033 or x.language_id == 1042, font.fonts)
         
         # 폰트 파싱 완료
-
         if platform.system().lower().find("windows") != -1:
             print("윈도우즈")
 
-        print("\x1b[1;32m" + "[폰트명 파싱 완료]" + "\x1b[0m")
+        logger.print_log(message="폰트 파싱이 완료되었습니다.", color="green")
         for font in list(results):
             print("{font_name} [{language_id}]".format(font_name=font.name, language_id = font.language_id))
 
