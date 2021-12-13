@@ -30,8 +30,10 @@ class FontDownloader:
 
         filename = self.wget_url.split('/')[-1]
 
-        # copy file to res folder
-        os.system('cp ' + filename + ' ./res/c_' + filename)
+        if sys.platform == 'darwin' or sys.platform == "linux":
+            os.system('cp ' + filename + ' ./res/c_' + filename)
+        elif sys.platform == 'win32':
+            os.system('copy ' + filename + ' ./res/c_' + filename)
 
 
     def check_araic2c(self):
