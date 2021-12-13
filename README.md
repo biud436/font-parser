@@ -27,12 +27,23 @@ the result of parsing the font is shown below.
 pipenv run start -d -f="res/NanumGothicCoding.ttf"
 
 # --------------- Debug Output --------------------- #
+12/13 22:46:38 [NOTICE] Downloading 1 item(s)
+
+12/13 22:46:38 [NOTICE] CUID#7 - Redirecting to https://raw.githubusercontent.com/biud436/font-parser/main/res/NanumGothicCoding.ttf
+
+12/13 22:46:38 [NOTICE] File already exists. Renamed to /Users/u/python-projects/reading-font/NanumGothicCoding.1.ttf.
+
+12/13 22:46:39 [NOTICE] Download complete: /Users/u/python-projects/reading-font/NanumGothicCoding.1.ttf
+
+Download Results:
+gid   |stat|avg speed  |path/URI
+======+====+===========+=======================================================
+0689bc|OK  |   5.3MiB/s|/Users/u/python-projects/reading-font/NanumGothicCoding.1.ttf
+
+Status Legend:
+(OK):download completed.
 폰트 객체가 생성되었습니다.
 빅엔디언 방식으로 12바이트를 읽었습니다.
-major_version : 1
-minor_version : 0
-num_of_tables : 14
-padding : 128
 태그명 4바이트를 읽었습니다[12]
 태그명 4바이트를 읽었습니다[28]
 태그명 4바이트를 읽었습니다[44]
@@ -45,33 +56,6 @@ padding : 128
 태그명 4바이트를 읽었습니다[156]
 태그명 4바이트를 읽었습니다[172]
 태그명 4바이트를 읽었습니다[188]
-check_sum : 1870634382
-offset : 2777952
-length : 1110
-format_selector : 0
-name_record_count : 23
-storage_offset : 282
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : NanumGothicCoding
-name : 나눔고딕코딩
-name : NanumGothicCoding
-name : 나눔고딕코딩
 폰트 파싱이 완료되었습니다.
 NanumGothicCoding [1033]
 나눔고딕코딩 [1042]

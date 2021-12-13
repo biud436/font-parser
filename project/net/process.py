@@ -38,7 +38,13 @@ class FontDownloader:
 
     def check_araic2c(self):
         # file exist?
-        result  = os.system('aria2c')
+        result = 0
+
+        if sys.platform == 'darwin' or sys.platform == "linux":
+            result = os.system('aria2c > /dev/null 2>&1')
+        else:
+            result  = os.system('aria2c > nul 2>&1')
+
         if result:
             return True
         else:
