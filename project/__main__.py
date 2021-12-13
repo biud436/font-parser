@@ -12,13 +12,14 @@ class EntryPoint:
 
     @staticmethod
     def main():
-
-        FontDownloader('https://github.com/biud436/font-parser/raw/main/res/NanumGothicCoding.ttf')
-
         # 옵션 파서 생성
         args = OptionParserBuilder.build()
         font_name = args.font.strip()
         is_debug =args.debug
+        enabled_download = args.enabled_download
+
+        if enabled_download:
+            FontDownloader(args.url or 'https://github.com/biud436/font-parser/raw/main/res/NanumGothicCoding.ttf')
 
         Logger.DEBUG_FLAG = is_debug == True
 

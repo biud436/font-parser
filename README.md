@@ -24,7 +24,7 @@ the result of parsing the font is shown below.
 
 ```sh
 # The parameter named '-d' is used to show the debug information.
-pipenv run start -d -f="res/NanumGothicCoding.ttf"
+pipenv run start --font="./res/NanumGothicCoding.ttf" --enabled_download --url="https://github.com/biud436/font-parser/raw/main/res/NanumGothicCoding.ttf"
 
 # --------------- Debug Output --------------------- #
 12/13 22:46:38 [NOTICE] Downloading 1 item(s)

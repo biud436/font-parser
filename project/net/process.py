@@ -1,10 +1,8 @@
 
-# child process
 import os
 import sys
 import time
 import subprocess
-from typing import IO
 
 class FontDownloader:
     def __init__(self, url) -> None:
@@ -37,7 +35,6 @@ class FontDownloader:
 
 
     def check_araic2c(self):
-        # file exist?
         result = 0
 
         if sys.platform == 'darwin' or sys.platform == "linux":

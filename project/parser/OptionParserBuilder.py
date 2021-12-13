@@ -9,6 +9,8 @@ class OptionParserBuilder:
         
         # 디버그 모드 토글
         parser.add_argument("-d", "--debug", help="toggle debug mode", action="store_true")
+        parser.add_argument("-e", "--enabled_download", help="enables downloading the font via web", action="store_true")
+        parser.add_argument("-u", "--url", help="type the path to save the font file")
 
         args = parser.parse_args()
         
