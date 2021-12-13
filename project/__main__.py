@@ -4,6 +4,7 @@ import platform
 
 from logger.Logger import Logger
 from net.url import Uri
+from net.process import FontDownloader
 
 logger = Logger()
 
@@ -12,7 +13,7 @@ class EntryPoint:
     @staticmethod
     def main():
 
-        # print(Uri("https://www.google.com").check_true_type_font())
+        FontDownloader('https://github.com/biud436/font-parser/raw/main/res/NanumGothicCoding.ttf')
 
         # 옵션 파서 생성
         args = OptionParserBuilder.build()
