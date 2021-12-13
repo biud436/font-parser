@@ -3,6 +3,7 @@ from parser.OptionParserBuilder import OptionParserBuilder
 import platform
 
 from logger.Logger import Logger
+from net.url import Uri
 
 logger = Logger()
 
@@ -10,6 +11,9 @@ class EntryPoint:
 
     @staticmethod
     def main():
+
+        # print(Uri("https://www.google.com").check_true_type_font())
+
         # 옵션 파서 생성
         args = OptionParserBuilder.build()
         font_name = args.font.strip()
