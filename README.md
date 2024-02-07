@@ -7,6 +7,10 @@ This project allows you to read a real font family from the TrueType font file.
 To use this tool, you need to install dependencies using pipenv.
 
 ```sh
+# if you don't have pipenv, you can install it using pip.
+pip install pipenv
+
+# install dependencies
 pipenv install
 ```
 
