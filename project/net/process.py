@@ -8,7 +8,7 @@ class FontDownloader:
     def __init__(self, url) -> None:
         
         # wget run
-        if sys.platform == 'darwin':
+        if sys.platform == 'darwin' or sys.platform == "linux":
             self.wget = 'curl'
         elif sys.platform == 'win32':
             self.wget = 'powershell.exe wget'
